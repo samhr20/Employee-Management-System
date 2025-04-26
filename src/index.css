@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+button{
+    cursor: pointer;
+}
+
+#taskList::-webkit-scrollbar{
+    display: block;
+    height: 1px;
+}
