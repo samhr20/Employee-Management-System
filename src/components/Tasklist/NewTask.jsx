@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FailedTask = ({task}) => {
+const NewTask = ({task}) => {
   return (
     <div className='h-full shrink-0 bg-red-500 w-[380px] rounded-xl'>
     <div className='flex justify-between items-center p-3'>
@@ -12,10 +12,10 @@ const FailedTask = ({task}) => {
         <p className='mt-2.5'>{task.taskDesc}</p>
     </div>
     <div className='flex justify-between items-center p-3'>
-        <button className='bg-green-500 px-3 p-2 rounded-sm  shadow-black shadow-sm'>Completed</button>
-    </div>  
+        <button className='bg-green-500 px-3 p-2 rounded-sm  shadow-black shadow-sm'>Accept</button>
+    </div>
 </div>
   )
 }
 
-export default FailedTask
+export default NewTask

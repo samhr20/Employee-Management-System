@@ -1,59 +1,41 @@
 import React from 'react'
+import AcceptTask from './AcceptTask'
+import CompleteTask from './CompleteTask'
+import FailedTask from './FailedTask'
+import NewTask from './NewTask'
 
-const TaskList = () => {
+const TaskList = ({ data }) => {
+  const newTasks = data.tasks.filter((task) => task.newTask);
+  const activeTasks = data.tasks.filter((task) => task.active && !task.newTask); // <-- yeh correct
+  const completedTasks = data.tasks.filter((task) => task.completed);
+  const failedTasks = data.tasks.filter((task) => task.failed);
+
   return (
-    <div id='taskList' className='flex flex-nowrap overflow-x-auto gap-7 items-center justify-start h-[58%] w-full  mt-10 '>
-       <div className='h-full shrink-0 bg-red-500 w-[380px] rounded-xl'>
-        <div className='flex justify-between items-center p-3'>
-            <h1 className='bg-red-600 rounded-xl px-5 font-bold p-2'>High</h1>
-            <p className='font-bold text-white'>24 April 2025</p>
-        </div>
-        <div className='mt-2 px-4 overflow-x-auto'>
-            <h1 className='text-xl font-bold'>Complete this program</h1>
-            <p className='mt-2.5'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In totam labore, mollitia nobis sunt ut corporis! Sed quae officiis tenetur porro magnam dignissimos maxime, iure laboriosam quos nihil eligendi repellat.</p>
-        </div>
-       </div>
-       <div className='h-full shrink-0 bg-green-500 w-[380px] rounded-xl'>
-        <div className='flex justify-between items-center p-3'>
-            <h1 className='bg-red-600 rounded-xl px-5 font-bold p-2'>High</h1>
-            <p className='font-bold text-white'>24 April 2025</p>
-        </div>
-        <div className='mt-2 px-4 overflow-x-auto'>
-            <h1 className='text-xl font-bold'>Complete this program</h1>
-            <p className='mt-2.5'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In totam labore, mollitia nobis sunt ut corporis! Sed quae officiis tenetur porro magnam dignissimos maxime, iure laboriosam quos nihil eligendi repellat.</p>
-        </div>
-       </div>
-       <div className='h-full shrink-0 bg-blue-500 w-[380px] rounded-xl'>
-        <div className='flex justify-between items-center p-3'>
-            <h1 className='bg-red-600 rounded-xl px-5 font-bold p-2'>High</h1>
-            <p className='font-bold text-white'>24 April 2025</p>
-        </div>
-        <div className='mt-2 px-4 overflow-x-auto'>
-            <h1 className='text-xl font-bold'>Complete this program</h1>
-            <p className='mt-2.5'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In totam labore, mollitia nobis sunt ut corporis! Sed quae officiis tenetur porro magnam dignissimos maxime, iure laboriosam quos nihil eligendi repellat.</p>
-        </div>
-       </div>
-       <div className='h-full shrink-0 bg-red-500 w-[380px] rounded-xl'>
-        <div className='flex justify-between items-center p-3'>
-            <h1 className='bg-red-600 rounded-xl px-5 font-bold p-2'>High</h1>
-            <p className='font-bold text-white'>24 April 2025</p>
-        </div>
-        <div className='mt-2 px-4 overflow-x-auto'>
-            <h1 className='text-xl font-bold'>Complete this program</h1>
-            <p className='mt-2.5'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In totam labore, mollitia nobis sunt ut corporis! Sed quae officiis tenetur porro magnam dignissimos maxime, iure laboriosam quos nihil eligendi repellat.</p>
-        </div>
-       </div>
-       <div className='h-full shrink-0 bg-green-500 w-[380px] rounded-xl'>
-        <div className='flex justify-between items-center p-3'>
-            <h1 className='bg-red-600 rounded-xl px-5 font-bold p-2'>High</h1>
-            <p className='font-bold text-white'>24 April 2025</p>
-        </div>
-        <div className='mt-2 px-4 overflow-x-auto'>
-            <h1 className='text-xl font-bold'>Complete this program</h1>
-            <p className='mt-2.5'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In totam labore, mollitia nobis sunt ut corporis! Sed quae officiis tenetur porro magnam dignissimos maxime, iure laboriosam quos nihil eligendi repellat.</p>
-        </div>
-       </div>
+    <div id="taskList" className="flex flex-nowrap overflow-x-auto gap-7 items-center justify-start h-[58%] w-full mt-10">
 
+      {newTasks.map((task, index) => (
+        <React.Fragment key={`new-${index}`}>
+          <NewTask task={task} />
+        </React.Fragment>
+      ))}
+      
+      {activeTasks.map((task, index) => (
+        <React.Fragment key={`active-${index}`}>
+          <AcceptTask task={task} />
+        </React.Fragment>
+      ))}
+      
+      {completedTasks.map((task, index) => (
+        <React.Fragment key={`completed-${index}`}>
+          <CompleteTask task={task} />
+        </React.Fragment>
+      ))}
+      
+      {failedTasks.map((task, index) => (
+        <React.Fragment key={`failed-${index}`}>
+          <FailedTask task={task} />
+        </React.Fragment>
+      ))}
     </div>
   )
 }
