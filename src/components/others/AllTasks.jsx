@@ -1,22 +1,40 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import { AuthContext } from '../../context/AuthProvider';
 
 const AllTasks = () => {
+
+   const {employees} = useContext(AuthContext)   
+
   return (
     <div className="mt-10">
-    <h2 className="text-xl font-semibold mb-4">All Tasks</h2>
+      <h2 className="text-xl font-semibold mb-4">All Tasks</h2>
 
-    <div className="max-h-[400px] overflow-y-auto pr-2 scroll-smooth">
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <div  className="bg-[#2c2c2c] p-4 rounded-lg shadow-md border border-gray-700">
-            <h3 className="text-lg font-bold mb-2">Task Title </h3>
-            <p className="text-sm"><span className="font-semibold">Date:</span> 2025-04-25</p>
-            <p className="text-sm"><span className="font-semibold">Assigned To:</span> Name </p>
-            <p className="text-sm"><span className="font-semibold">Admin:</span> Shubham Saini</p>
-          </div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-[#2c2c2c] rounded-lg overflow-hidden">
+          <thead className="bg-gray-700 text-white">
+            <tr>
+              <th className="py-3 px-6 text-left">Employee Name</th>
+              <th className="py-3 px-6 text-left">New Task</th>
+              <th className="py-3 px-6 text-left">Active</th>
+              <th className="py-3 px-6 text-left">Completed</th>
+              <th className="py-3 px-6 text-left">Failed</th>
+            </tr>
+          </thead>
+          <tbody className="text-gray-300">
+            {employees.map((e)=>(
+              <tr key={e.id} className="border-b border-gray-600 hover:bg-gray-800">
+              <td className="py-3 px-6">{e.firstName}</td>
+              <td className="py-3 px-6">{e.taskNumbers.newTask}</td>
+              <td className="py-3 px-6">{e.taskNumbers.active}</td>
+              <td className="py-3 px-6">{e.taskNumbers.completed}</td>
+              <td className="py-3 px-6">{e.taskNumbers.failed}</td>
+            </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
-  </div>
-  )
+  );
 }
 
-export default AllTasks
+export default AllTasks;
